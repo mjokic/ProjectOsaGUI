@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_projectosagui" default="compile.module.projectosagui">
+  <dirname property="module.projectosagui.basedir" file="${ant.file.module_projectosagui}"/>
+  
+  <property name="module.jdk.home.projectosagui" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.projectosagui" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.projectosagui" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.projectosagui" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="projectosagui.output.dir" value="${module.projectosagui.basedir}/out/production/ProjectOsaGUI"/>
+  <property name="projectosagui.testoutput.dir" value="${module.projectosagui.basedir}/out/test/ProjectOsaGUI"/>
+  
+  <path id="projectosagui.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="projectosagui.module.production.classpath">
+    <path refid="${module.jdk.classpath.projectosagui}"/>
+    <pathelement location="${basedir}/../../Downloads/retrofit-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/converter-gson-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okio-1.13.0.jar"/>
+    <pathelement location="${basedir}/../../Downloads/gson-2.8.1.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okhttp-3.8.0.jar"/>
+  </path>
+  
+  <path id="projectosagui.runtime.production.module.classpath">
+    <pathelement location="${projectosagui.output.dir}"/>
+    <pathelement location="${basedir}/../../Downloads/retrofit-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/converter-gson-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okio-1.13.0.jar"/>
+    <pathelement location="${basedir}/../../Downloads/gson-2.8.1.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okhttp-3.8.0.jar"/>
+  </path>
+  
+  <path id="projectosagui.module.classpath">
+    <path refid="${module.jdk.classpath.projectosagui}"/>
+    <pathelement location="${projectosagui.output.dir}"/>
+    <pathelement location="${basedir}/../../Downloads/retrofit-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/converter-gson-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okio-1.13.0.jar"/>
+    <pathelement location="${basedir}/../../Downloads/gson-2.8.1.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okhttp-3.8.0.jar"/>
+  </path>
+  
+  <path id="projectosagui.runtime.module.classpath">
+    <pathelement location="${projectosagui.testoutput.dir}"/>
+    <pathelement location="${projectosagui.output.dir}"/>
+    <pathelement location="${basedir}/../../Downloads/retrofit-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/converter-gson-2.3.0.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okio-1.13.0.jar"/>
+    <pathelement location="${basedir}/../../Downloads/gson-2.8.1.jar"/>
+    <pathelement location="${basedir}/../../Desktop/imports/okhttp-3.8.0.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.projectosagui">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.projectosagui">
+    <patternset refid="excluded.from.module.projectosagui"/>
+  </patternset>
+  
+  <path id="projectosagui.module.sourcepath">
+    <dirset dir="${module.projectosagui.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.projectosagui" depends="compile.module.projectosagui.production,compile.module.projectosagui.tests" description="Compile module ProjectOsaGUI"/>
+  
+  <target name="compile.module.projectosagui.production" depends="register.custom.compilers" description="Compile module ProjectOsaGUI; production classes">
+    <mkdir dir="${projectosagui.output.dir}"/>
+    <javac2 destdir="${projectosagui.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.projectosagui}/javac">
+      <compilerarg line="${compiler.args.projectosagui}"/>
+      <bootclasspath refid="projectosagui.module.bootclasspath"/>
+      <classpath refid="projectosagui.module.production.classpath"/>
+      <src refid="projectosagui.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.projectosagui"/>
+    </javac2>
+    
+    <copy todir="${projectosagui.output.dir}">
+      <fileset dir="${module.projectosagui.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.projectosagui.tests" depends="register.custom.compilers,compile.module.projectosagui.production" description="compile module ProjectOsaGUI; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.projectosagui" description="cleanup module">
+    <delete dir="${projectosagui.output.dir}"/>
+    <delete dir="${projectosagui.testoutput.dir}"/>
+  </target>
+</project>

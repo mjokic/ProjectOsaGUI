@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane prefHeight="417.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <TabPane prefHeight="416.0" prefWidth="631.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="2147483647">
+        <tabs>
+          <Tab fx:id="tabAuctions" text="Auctions">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableViewAuctions" prefHeight="200.0" prefWidth="637.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumnAuctionId" prefWidth="40.0" text="#" />
+                            <TableColumn fx:id="tableColumnStartPrice" prefWidth="77.0" text="Price" />
+                              <TableColumn fx:id="tableColumnstartDate" prefWidth="150.0" text="Start Date" />
+                              <TableColumn fx:id="tableColumnendDate" prefWidth="92.0" text="End Date" />
+                              <TableColumn fx:id="tableColumnAuctionUser" prefWidth="75.0" text="User" />
+                              <TableColumn fx:id="tableColumnAuctionItem" prefWidth="75.0" text="Item" />
+                              <TableColumn fx:id="tableColumnAuctionBids" prefWidth="67.0" text="Bids" />
+                              <TableColumn fx:id="tableColumnAuctionOver" prefWidth="83.0" text="Over" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabItems" text="Items">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableViewItems" prefHeight="164.0" prefWidth="637.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumnItemsId" prefWidth="75.0" text="#" />
+                            <TableColumn fx:id="tableColumnItemsName" prefWidth="75.0" text="Name" />
+                              <TableColumn fx:id="tableColumnItemsDesc" prefWidth="121.0" text="Description" />
+                              <TableColumn fx:id="tableColumnItemsSold" prefWidth="75.0" text="Sold" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabBids" text="Bids">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableViewBids" prefHeight="165.0" prefWidth="637.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumnBidsId" prefWidth="75.0" text="#" />
+                              <TableColumn fx:id="tableColumnBidsPrice" prefWidth="75.0" text="Price" />
+                              <TableColumn fx:id="tableColumnBidsDate" prefWidth="75.0" text="Date" />
+                            <TableColumn fx:id="tableColumnBidsUser" prefWidth="75.0" text="User" />
+                              <TableColumn fx:id="tableColumnBidsAuction" prefWidth="75.0" text="Auction" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabUsers" text="Users">
+              <content>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="631.0">
+                     <children>
+                        <TableView fx:id="tableViewUsers" prefHeight="328.0" prefWidth="637.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumnUserId" prefWidth="48.0" text="#" />
+                            <TableColumn fx:id="tableColumnEmail" prefWidth="163.0" text="Email" />
+                              <TableColumn fx:id="tableColumnName" prefWidth="92.0" text="Name" />
+                              <TableColumn fx:id="tableColumnAddress" prefWidth="75.0" text="Address" />
+                              <TableColumn fx:id="tableColumnPhone" prefWidth="75.0" text="Phone" />
+                              <TableColumn fx:id="tableColumnRole" prefWidth="75.0" text="Role" />
+                              <TableColumn fx:id="tableColumnActive" prefWidth="75.0" text="Active" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="buttonUserAdd" onAction="#addUser" layoutX="1.0" layoutY="330.0" mnemonicParsing="false" text="+" />
+                        <Button fx:id="buttonUserRemove" onAction="#deleteUser" layoutX="30.0" layoutY="330.0" mnemonicParsing="false" text="-" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+
+</GridPane>
