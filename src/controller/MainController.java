@@ -298,6 +298,31 @@ public class MainController implements Initializable {
         this.window = window;
     }
 
+
+
+    public void addBid() throws Exception{
+        URL path = getClass().getClassLoader().getResource("view/bidWindow.fxml");
+        FXMLLoader loader = new FXMLLoader(path);
+        Parent layout = loader.load();
+
+        Scene scene = new Scene(layout, 300, 400);
+        Stage window1 = new Stage();
+        window1.initModality(Modality.APPLICATION_MODAL);
+        window1.initOwner(window);
+        window1.setTitle("Bid Add");
+        window1.setScene(scene);
+
+        BidsController bidsController = loader.getController();
+        bidsController.setWindow(window1);
+
+        window1.showAndWait();
+    }
+
+    public void deleteBid(){
+        // delete user
+    }
+
+
     public void addUser() throws Exception{
 
         URL path = getClass().getClassLoader().getResource("view/userWindow.fxml");
@@ -345,6 +370,7 @@ public class MainController implements Initializable {
         }
 
     }
+
 
 
     private boolean sendDeleteRequest(long id){

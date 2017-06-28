@@ -63,7 +63,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableViewBids" prefHeight="165.0" prefWidth="637.0">
+                        <TableView fx:id="tableViewBids" prefHeight="344.0" prefWidth="637.0">
                           <columns>
                             <TableColumn fx:id="tableColumnBidsId" prefWidth="75.0" text="#" />
                               <TableColumn fx:id="tableColumnBidsPrice" prefWidth="75.0" text="Price" />
@@ -72,6 +72,8 @@
                               <TableColumn fx:id="tableColumnBidsAuction" prefWidth="75.0" text="Auction" />
                           </columns>
                         </TableView>
+                        <Button fx:id="buttonBidAdd" onAction="#addBid" layoutX="6.0" layoutY="344.0" mnemonicParsing="false" text="+" />
+                        <Button fx:id="buttonBidRemove" onAction="#deleteBid" layoutX="35.0" layoutY="344.0" mnemonicParsing="false" text="-" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -90,8 +92,8 @@
                               <TableColumn fx:id="tableColumnActive" prefWidth="75.0" text="Active" />
                           </columns>
                         </TableView>
-                        <Button fx:id="buttonUserAdd" onAction="#addUser" layoutX="1.0" layoutY="330.0" mnemonicParsing="false" text="+" />
-                        <Button fx:id="buttonUserRemove" onAction="#deleteUser" layoutX="30.0" layoutY="330.0" mnemonicParsing="false" text="-" />
+                        <Button fx:id="buttonUserAdd" layoutX="1.0" layoutY="330.0" mnemonicParsing="false" onAction="#addUser" text="+" />
+                        <Button fx:id="buttonUserRemove" layoutX="30.0" layoutY="330.0" mnemonicParsing="false" onAction="#deleteUser" text="-" />
                      </children></AnchorPane>
               </content>
             </Tab>
