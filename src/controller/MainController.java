@@ -224,6 +224,15 @@ public class MainController implements Initializable {
         tableColumnBidsUser.setCellValueFactory(new PropertyValueFactory("user_id"));
         tableColumnBidsAuction.setCellValueFactory(new PropertyValueFactory("auction_id"));
 
+        tableViewBids.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2){
+                    BidDTO bidDTO = (BidDTO)tableViewBids.getSelectionModel().getSelectedItem();
+                    openBidWindow(bidDTO);
+                }
+            }
+        });
 
 //        System.out.println("Token " + Manager.token);
     }
@@ -300,26 +309,65 @@ public class MainController implements Initializable {
 
 
 
-    public void addBid() throws Exception{
-        URL path = getClass().getClassLoader().getResource("view/bidWindow.fxml");
-        FXMLLoader loader = new FXMLLoader(path);
-        Parent layout = loader.load();
-
-        Scene scene = new Scene(layout, 300, 400);
-        Stage window1 = new Stage();
-        window1.initModality(Modality.APPLICATION_MODAL);
-        window1.initOwner(window);
-        window1.setTitle("Bid Add");
-        window1.setScene(scene);
-
-        BidsController bidsController = loader.getController();
-        bidsController.setWindow(window1);
-
-        window1.showAndWait();
+    public void addBid(){
+        openBidWindow(null);
     }
 
     public void deleteBid(){
-        // delete user
+        int index = tableViewBids.getSelectionModel().getSelectedIndex();
+        if(index == -1){
+            new Alert(Alert.AlertType.ERROR, "Select bid to delete!").showAndWait();
+            return;
+        }
+
+        BidDTO bidDTO = (BidDTO) tableViewBids.getItems().get(index);
+        if(bidDTO != null){
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", yes, no);
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if(result.get() == yes){
+                boolean status = sendBidDeleteRequest(bidDTO.getId());
+                if(!status){
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong!");
+                }
+            }
+        }
+
+    }
+
+    private void openBidWindow(BidDTO bidDTO){
+        try{
+            URL path = getClass().getClassLoader().getResource("view/bidWindow.fxml");
+            FXMLLoader loader = new FXMLLoader(path);
+
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    BidsController bidsController = new BidsController();
+                    bidsController.setBid(bidDTO);
+                    return bidsController;
+                }
+            });
+
+            Parent layout = loader.load();
+            Scene scene = new Scene(layout, 300, 400);
+            Stage window1 = new Stage();
+            window1.initModality(Modality.APPLICATION_MODAL);
+            window1.initOwner(window);
+            window1.setTitle("Bid Add");
+            window1.setScene(scene);
+
+
+            BidsController bidsController = loader.getController();
+            bidsController.setWindow(window1);
+
+            window1.showAndWait();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 
@@ -361,7 +409,7 @@ public class MainController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if(result.get() == yes){
-                boolean status = sendDeleteRequest(user.getId());
+                boolean status = sendUserDeleteRequest(user.getId());
                 if(!status){
                     new Alert(Alert.AlertType.ERROR, "Something went wrong!");
                     return;
@@ -373,7 +421,7 @@ public class MainController implements Initializable {
 
 
 
-    private boolean sendDeleteRequest(long id){
+    private boolean sendUserDeleteRequest(long id){
         boolean status = false;
 
         Response response;
@@ -391,4 +439,23 @@ public class MainController implements Initializable {
         return status;
     }
 
+    private boolean sendBidDeleteRequest(long id){
+        boolean status = false;
+        Response response;
+        try{
+            response = Manager.bidApiService
+                    .deleteBid(id, Manager.token)
+                    .execute();
+        }catch (Exception ex){
+            return status;
+        }
+
+
+        if(response.code() == 200){
+            status = true;
+        }
+
+        return status;
+
+    }
 }

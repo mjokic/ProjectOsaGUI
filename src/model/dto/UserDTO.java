@@ -97,6 +97,17 @@ public class UserDTO {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof UserDTO){
+            UserDTO userDTO = (UserDTO) obj;
+            if(userDTO.getId() == this.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "UserDTO{" +
                 "id=" + id +

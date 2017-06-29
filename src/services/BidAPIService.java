@@ -4,10 +4,7 @@ package services;
 import model.Bid;
 import model.dto.BidDTO;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 import java.util.List;
 
@@ -18,5 +15,11 @@ public interface BidAPIService {
 
     @POST("/bids/")
     Call<Bid> createBid(@Body BidDTO bid, @Header("Authorization") String token);
+
+    @PUT("/bids/{id}")
+    Call<Void> editBid(@Body BidDTO bid, @Path("id") long id, @Header("Authorization") String token);
+
+    @DELETE("/bids/{id}")
+    Call<Void> deleteBid(@Path("id") long id, @Header("Authorization") String token);
 
 }
