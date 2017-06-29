@@ -7,7 +7,7 @@ import model.dto.UserDTO;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserConverter extends StringConverter{
+public class UserDTOConverter extends StringConverter{
 
     private Map<String, UserDTO> mapUserDTO = new HashMap<>();
 

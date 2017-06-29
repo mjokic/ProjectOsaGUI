@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class AuctionDTO {
 
+    private long id;
     private double startPrice;
     private Date startDate;
     private Date endDate;
@@ -14,13 +15,22 @@ public class AuctionDTO {
 
     public AuctionDTO(){}
 
-    public AuctionDTO(double startPrice, Date startDate, Date endDate, long user_id, long item_id, boolean over) {
+    public AuctionDTO(long id, double startPrice, Date startDate, Date endDate, long user_id, long item_id, boolean over) {
+        this.id = id;
         this.startPrice = startPrice;
         this.startDate = startDate;
         this.endDate = endDate;
         this.user_id = user_id;
         this.item_id = item_id;
         this.over = over;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public double getStartPrice() {
