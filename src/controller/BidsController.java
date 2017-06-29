@@ -7,14 +7,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Auction;
+import model.Bid;
 import model.Manager;
+import model.User;
 import model.converters.AuctionConverter;
 import model.converters.UserDTOConverter;
+import model.dto.AuctionDTO;
 import model.dto.BidDTO;
 import model.dto.UserDTO;
 import retrofit2.Response;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,6 +35,7 @@ public class BidsController implements Initializable {
 
     @FXML private TextField textFieldBidID;
     @FXML private TextField textFieldPrice;
+    @FXML private DatePicker datePickerBidDate;
     @FXML private ComboBox comboBoxUser;
     @FXML private ComboBox comboBoxAuction;
     @FXML private Button buttonBidSave;
@@ -96,12 +102,51 @@ public class BidsController implements Initializable {
 
     public void onSaveButtonClick(){
 
-        UserDTO userDTO = (UserDTO) comboBoxUser.getValue();
-        System.out.println(userDTO);
+        boolean status;
 
+        try {
+            status = sendCreateBidRequest();
+        }catch (Exception ex){
+            new Alert(Alert.AlertType.ERROR, ex.getMessage()).showAndWait();
+            return;
+        }
+
+
+        if(status){
+            window.close();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Something went wrong!").showAndWait();
+        }
+
+    }
+
+    private boolean sendCreateBidRequest() throws Exception{
+        boolean status = false;
+
+        int bidStartPrice = Integer.parseInt(textFieldPrice.getText());
+        Date date = new SimpleDateFormat("dd/mm/yyyy").parse(datePickerBidDate.getEditor().getText());
         Auction auction = (Auction) comboBoxAuction.getValue();
-        System.out.println(auction);
+        UserDTO userDTO = (UserDTO) comboBoxUser.getValue();
 
+        BidDTO bidDTO = new BidDTO(bidStartPrice, date, auction.getId(), userDTO.getId());
+
+        Response response;
+
+        try {
+            response = Manager.bidApiService
+                    .createBid(bidDTO, Manager.token)
+                    .execute();
+        }catch (Exception ex){
+            return status;
+        }
+
+        if(response.code() == 201){
+            status = true;
+        }else{
+            throw new Exception(response.errorBody().string());
+        }
+
+        return status;
     }
 
     public void setWindow(Stage window){
