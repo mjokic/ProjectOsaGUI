@@ -220,6 +220,16 @@ public class MainController implements Initializable {
         tableColumnItemsUser.setCellValueFactory(new PropertyValueFactory("userId"));
         tableColumnItemsSold.setCellValueFactory(new PropertyValueFactory("sold"));
 
+        tableViewItems.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2){
+                    ItemDTO itemDTO = (ItemDTO)tableViewItems.getSelectionModel().getSelectedItem();
+                    openItemWindow(itemDTO);
+                }
+            }
+        });
+
 
         tableColumnBidsId.setCellValueFactory(new PropertyValueFactory("id"));
         tableColumnBidsPrice.setCellValueFactory(new PropertyValueFactory("price"));
@@ -423,12 +433,32 @@ public class MainController implements Initializable {
 
 
     public void addItem() throws Exception {
-        // add item
         openItemWindow(null);
     }
 
     public void removeItem() throws Exception {
-        // remove item
+        int index = tableViewItems.getSelectionModel().getSelectedIndex();
+        if(index == -1){
+            new Alert(Alert.AlertType.ERROR, "Select item to delete!").showAndWait();
+            return;
+        }
+
+        ItemDTO itemDTO = (ItemDTO) tableViewItems.getItems().get(index);
+        if(itemDTO != null){
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", yes, no);
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if(result.get() == yes){
+                boolean status = sendItemDeleteRequest(itemDTO.getId());
+                if(!status){
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong!");
+                    return;
+                }
+            }
+        }
     }
 
     private void openItemWindow(ItemDTO itemDTO){
@@ -511,5 +541,25 @@ public class MainController implements Initializable {
 
         return status;
 
+    }
+
+    private boolean sendItemDeleteRequest(long id){
+        boolean status = false;
+
+        Response response;
+        try{
+            response = Manager.itemApiService
+                    .deleteItem(id, Manager.token)
+                    .execute();
+        }catch (Exception ex){
+            return status;
+        }
+
+
+        if(response.code() == 200){
+            status = true;
+        }
+
+        return status;
     }
 }

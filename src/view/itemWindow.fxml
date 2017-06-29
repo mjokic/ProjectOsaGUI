@@ -30,6 +30,6 @@
       <TextField fx:id="textFieldItemName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextArea fx:id="textAreaItemDesc" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <ComboBox fx:id="comboBoxItemUser" prefHeight="26.0" prefWidth="216.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="buttonItemSave" defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="309.0" text="Save" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      <Button fx:id="buttonItemSave" onAction="#onButtonItemSave" defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="309.0" text="Save" GridPane.columnSpan="2" GridPane.rowIndex="4" />
    </children>
 </GridPane>
