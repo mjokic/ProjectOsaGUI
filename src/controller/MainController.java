@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Auction;
+import model.Item;
 import model.Manager;
 import model.dto.BidDTO;
 import model.dto.ItemDTO;
@@ -56,6 +57,7 @@ public class MainController implements Initializable {
     @FXML private TableColumn tableColumnItemsId;
     @FXML private TableColumn tableColumnItemsName;
     @FXML private TableColumn tableColumnItemsDesc;
+    @FXML private TableColumn tableColumnItemsUser;
     @FXML private TableColumn tableColumnItemsSold;
     //
 
@@ -215,6 +217,7 @@ public class MainController implements Initializable {
         tableColumnItemsId.setCellValueFactory(new PropertyValueFactory("id"));
         tableColumnItemsName.setCellValueFactory(new PropertyValueFactory("name"));
         tableColumnItemsDesc.setCellValueFactory(new PropertyValueFactory("description"));
+        tableColumnItemsUser.setCellValueFactory(new PropertyValueFactory("userId"));
         tableColumnItemsSold.setCellValueFactory(new PropertyValueFactory("sold"));
 
 
@@ -234,7 +237,6 @@ public class MainController implements Initializable {
             }
         });
 
-//        System.out.println("Token " + Manager.token);
     }
 
 
@@ -419,6 +421,58 @@ public class MainController implements Initializable {
 
     }
 
+
+    public void addItem() throws Exception {
+        // add item
+        openItemWindow(null);
+    }
+
+    public void removeItem() throws Exception {
+        // remove item
+    }
+
+    private void openItemWindow(ItemDTO itemDTO){
+
+        try{
+            URL path = getClass().getClassLoader().getResource("view/itemWindow.fxml");
+            FXMLLoader loader = new FXMLLoader(path);
+
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    ItemController itemController = new ItemController();
+                    itemController.setItem(itemDTO);
+                    return itemController;
+                }
+            });
+
+            Parent layout = loader.load();
+            Scene scene = new Scene(layout, 300, 400);
+            Stage window1 = new Stage();
+            window1.initModality(Modality.APPLICATION_MODAL);
+            window1.initOwner(window);
+            window1.setTitle("Item Add");
+            window1.setScene(scene);
+
+
+            ItemController itemController = loader.getController();
+            itemController.setWindow(window1);
+
+            window1.showAndWait();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
+
+
+    public void addAuction() throws Exception{
+        // add auction
+    }
+
+    public void removeAuction() throws Exception{
+        // remove item
+    }
 
 
     private boolean sendUserDeleteRequest(long id){

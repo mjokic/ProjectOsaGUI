@@ -23,13 +23,13 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <TabPane prefHeight="416.0" prefWidth="631.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="2147483647">
+      <TabPane prefHeight="416.0" prefWidth="660.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
         <tabs>
           <Tab fx:id="tabAuctions" text="Auctions">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableViewAuctions" prefHeight="200.0" prefWidth="637.0">
+                        <TableView fx:id="tableViewAuctions" prefHeight="356.0" prefWidth="660.0">
                           <columns>
                             <TableColumn fx:id="tableColumnAuctionId" prefWidth="40.0" text="#" />
                             <TableColumn fx:id="tableColumnStartPrice" prefWidth="77.0" text="Price" />
@@ -41,6 +41,8 @@
                               <TableColumn fx:id="tableColumnAuctionOver" prefWidth="83.0" text="Over" />
                           </columns>
                         </TableView>
+                        <Button fx:id="buttonAddAuction" layoutY="356.0" mnemonicParsing="false" onAction="#addAuction" text="+" />
+                        <Button fx:id="buttonRemoveAuction" layoutX="29.0" layoutY="356.0" mnemonicParsing="false" onAction="#removeAuction" text="-" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -48,14 +50,17 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableViewItems" prefHeight="164.0" prefWidth="637.0">
+                        <TableView fx:id="tableViewItems" prefHeight="351.0" prefWidth="637.0">
                           <columns>
                             <TableColumn fx:id="tableColumnItemsId" prefWidth="75.0" text="#" />
                             <TableColumn fx:id="tableColumnItemsName" prefWidth="75.0" text="Name" />
-                              <TableColumn fx:id="tableColumnItemsDesc" prefWidth="121.0" text="Description" />
-                              <TableColumn fx:id="tableColumnItemsSold" prefWidth="75.0" text="Sold" />
+                              <TableColumn fx:id="tableColumnItemsDesc" prefWidth="192.0" text="Description" />
+                              <TableColumn fx:id="tableColumnItemsUser" prefWidth="71.0" text="User" />
+                              <TableColumn fx:id="tableColumnItemsSold" prefWidth="71.0" text="Sold" />
                           </columns>
                         </TableView>
+                        <Button fx:id="buttonAddItem" layoutY="351.0" mnemonicParsing="false" onAction="#addItem" text="+" />
+                        <Button fx:id="buttonRemoveItem" layoutX="29.0" layoutY="351.0" mnemonicParsing="false" onAction="#removeItem" text="-" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -67,13 +72,13 @@
                           <columns>
                             <TableColumn fx:id="tableColumnBidsId" prefWidth="75.0" text="#" />
                               <TableColumn fx:id="tableColumnBidsPrice" prefWidth="75.0" text="Price" />
-                              <TableColumn fx:id="tableColumnBidsDate" prefWidth="75.0" text="Date" />
+                              <TableColumn fx:id="tableColumnBidsDate" prefWidth="156.0" text="Date" />
                             <TableColumn fx:id="tableColumnBidsUser" prefWidth="75.0" text="User" />
-                              <TableColumn fx:id="tableColumnBidsAuction" prefWidth="75.0" text="Auction" />
+                              <TableColumn fx:id="tableColumnBidsAuction" prefWidth="89.0" text="Auction" />
                           </columns>
                         </TableView>
-                        <Button fx:id="buttonBidAdd" onAction="#addBid" layoutX="6.0" layoutY="344.0" mnemonicParsing="false" text="+" />
-                        <Button fx:id="buttonBidRemove" onAction="#deleteBid" layoutX="35.0" layoutY="344.0" mnemonicParsing="false" text="-" />
+                        <Button fx:id="buttonBidAdd" layoutX="6.0" layoutY="344.0" mnemonicParsing="false" onAction="#addBid" text="+" />
+                        <Button fx:id="buttonBidRemove" layoutX="35.0" layoutY="344.0" mnemonicParsing="false" onAction="#deleteBid" text="-" />
                      </children></AnchorPane>
               </content>
             </Tab>
