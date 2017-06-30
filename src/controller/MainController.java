@@ -154,55 +154,15 @@ public class MainController implements Initializable {
         tableColumnRole.setCellValueFactory(new PropertyValueFactory("role"));
         tableColumnActive.setCellValueFactory(new PropertyValueFactory("active"));
 
-        tableViewUsers.setRowFactory(param ->{
-                TableRow<UserDTO> row = new TableRow<>();
-                row.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        if(event.getClickCount() == 2){
-                            // open new window with user info...
-                            UserDTO user = row.getItem();
-                            System.out.println(user);
-
-                            try {
-                                URL path = getClass().getClassLoader().getResource("view/userWindow.fxml");
-                                FXMLLoader loader = new FXMLLoader(path);
-
-                                loader.setControllerFactory(new Callback<Class<?>, Object>() {
-                                    @Override
-                                    public Object call(Class<?> param) {
-
-                                        UserController userController = new UserController();
-                                        userController.setUser(user);
-                                        return userController;
-
-                                    }
-                                });
-
-                                Parent layout = loader.load();
-
-                                Scene scene = new Scene(layout, 300, 400);
-                                Stage window1 = new Stage();
-                                window1.initModality(Modality.APPLICATION_MODAL);
-                                window1.initOwner(window);
-                                window1.setTitle("User Edit");
-                                window1.setScene(scene);
-
-                                UserController uC = loader.getController();
-                                uC.setWindow(window1);
-
-                                window1.showAndWait();
-
-                            }catch (Exception ex){
-                                ex.printStackTrace();
-                            }
-
-                        }
-                    }
-                });
-                return row;
+        tableViewUsers.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2){
+                    UserDTO userDTO = (UserDTO) tableViewUsers.getSelectionModel().getSelectedItem();
+                    openUserWindow(userDTO);
                 }
-        );
+            }
+        });
 
 
         tableColumnAuctionId.setCellValueFactory(new PropertyValueFactory("id"));
@@ -330,6 +290,41 @@ public class MainController implements Initializable {
         this.window = window;
     }
 
+    private void openUserWindow(UserDTO userDTO){
+        try {
+            URL path = getClass().getClassLoader().getResource("view/userWindow.fxml");
+            FXMLLoader loader = new FXMLLoader(path);
+
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+
+                    UserController userController = new UserController();
+                    userController.setUser(userDTO);
+                    return userController;
+
+                }
+            });
+
+            Parent layout = loader.load();
+
+            Scene scene = new Scene(layout, 300, 400);
+            Stage window1 = new Stage();
+            window1.initModality(Modality.APPLICATION_MODAL);
+            window1.initOwner(window);
+            window1.setTitle("User Edit");
+            window1.setScene(scene);
+
+            UserController uC = loader.getController();
+            uC.setWindow(window1);
+
+            window1.showAndWait();
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+    }
 
 
     public void addBid(){
@@ -395,23 +390,7 @@ public class MainController implements Initializable {
 
 
     public void addUser() throws Exception{
-
-        URL path = getClass().getClassLoader().getResource("view/userWindow.fxml");
-        FXMLLoader loader = new FXMLLoader(path);
-        Parent layout = loader.load();
-
-        Scene scene = new Scene(layout, 300, 400);
-        Stage window1 = new Stage();
-        window1.initModality(Modality.APPLICATION_MODAL);
-        window1.initOwner(window);
-        window1.setTitle("User Add");
-        window1.setScene(scene);
-
-        UserController uC = loader.getController();
-        uC.setWindow(window1);
-
-        window1.showAndWait();
-
+        openUserWindow(null);
     }
 
     public void deleteUser() throws Exception{

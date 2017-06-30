@@ -6,15 +6,20 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Manager;
-import model.User;
 import model.dto.UserDTO;
-import retrofit2.Call;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Response;
 
-import javax.jws.WebParam;
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
@@ -24,6 +29,9 @@ public class UserController implements Initializable {
     private ObservableList<String> roles = FXCollections.observableArrayList("ADMIN", "USER");
     private UserDTO user;
 
+    private String userAvatar = "default.png";
+
+    @FXML private ImageView imageViewUserAvatar;
     @FXML private TextField textFieldUserId;
     @FXML private TextField textFieldUserEmail;
     @FXML private PasswordField passwordFieldUserPassword;
@@ -40,6 +48,10 @@ public class UserController implements Initializable {
         choiceBoxRole.setItems(roles);
 
         if(user != null){
+
+            this.userAvatar = user.getPicture();
+            loadAvatar(user.getPicture());
+
             textFieldUserId.setText(String.valueOf(user.getId()));
             textFieldUserEmail.setText(user.getEmail());
             textFieldUserName.setText(user.getName());
@@ -58,6 +70,7 @@ public class UserController implements Initializable {
                 choiceBoxRole.getSelectionModel().select(1);
             }
         }else{
+            loadAvatar(this.userAvatar);
             buttonSave.setText("Add");
         }
 
@@ -78,11 +91,13 @@ public class UserController implements Initializable {
         userDTO.setPhone(textFieldUserPhone.getText());
         userDTO.setRole((String) choiceBoxRole.getSelectionModel().getSelectedItem());
         userDTO.setActive(checkBoxUserActive.isSelected());
+        userDTO.setPicture(this.userAvatar);
 
         String password = passwordFieldUserPassword.getText();
         if(!password.isEmpty()){
             userDTO.setPassword(password);
         }
+
 
         boolean status;
         if(user == null){
@@ -101,6 +116,69 @@ public class UserController implements Initializable {
 
     }
 
+    public void choseAvatar(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Chose avatar");
+        fileChooser.getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("All Images", "*.jpg", "*.jpeg","*.png"));
+
+        File file = fileChooser.showOpenDialog(window);
+
+        if(file != null) {
+            System.out.println(file.getName());
+
+            boolean status;
+            try {
+                status = uploadAvatar(file);
+            }catch (Exception ex){
+                new Alert(Alert.AlertType.ERROR, ex.getMessage()).showAndWait();
+                return;
+            }
+
+            if(status){
+                loadAvatar(this.userAvatar);
+                new Alert(Alert.AlertType.INFORMATION, "Upload successful!").showAndWait();
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Upload unsuccessful!").showAndWait();
+            }
+        }
+
+
+    }
+
+    private void loadAvatar(String avatar){
+        String url = Manager.url + "/images/avatar/" + avatar;
+        imageViewUserAvatar.setImage(new Image(url));
+    }
+
+    private boolean uploadAvatar(File file) throws Exception{
+        boolean status = false;
+
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        Response response;
+        try {
+            response = Manager.userApiService.uploadUserAvatar(body, Manager.token).execute();
+        }catch (Exception ex){
+            return status;
+        }
+
+        if(response.code() == 200){
+            status = true;
+            this.userAvatar = response.body().toString();
+            System.out.println(this.userAvatar);
+
+        }else{
+            throw new Exception(response.errorBody().string());
+        }
+
+        return status;
+    }
 
     private boolean addUser(UserDTO user){
         boolean status = false;

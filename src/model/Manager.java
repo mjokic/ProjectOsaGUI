@@ -25,10 +25,10 @@ public class Manager {
     public static ObservableList<UserDTO> users = FXCollections.observableArrayList();
 
 
-//    private static final String url
-//            = "http://104.223.21.47";
-    private static final String url
-        = "http://192.168.0.15:8080";
+    public static final String url
+            = "http://104.223.21.47";
+//    public static final String url
+//        = "http://192.168.0.15:8080";
 
     public static String email;
     public static String token;
