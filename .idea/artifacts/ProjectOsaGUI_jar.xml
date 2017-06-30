@@ -8,6 +8,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/okhttp-3.8.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/retrofit-2.3.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/converter-gson-2.3.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/tornadofx-controls-1.0.4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/logging-interceptor-3.8.1.jar" path-in-jar="/" />
     </root>
   </artifact>

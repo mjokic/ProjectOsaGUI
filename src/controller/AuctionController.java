@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Auction;
-import model.Item;
 import model.Manager;
 import model.converters.ItemConverter;
 import model.converters.UserDTOConverter;

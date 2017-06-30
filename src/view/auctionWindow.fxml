@@ -31,7 +31,7 @@
       <Label text="End Date:" GridPane.rowIndex="3" />
       <Label text="User:" GridPane.rowIndex="4" />
       <Label text="Item:" GridPane.rowIndex="5" />
-      <Button fx:id="buttonAuctionAdd" onAction="#onButtonAuctionAddClick" defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="301.0" text="Add" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+      <Button fx:id="buttonAuctionAdd" onAction="#onButtonAuctionAddClick" defaultButton="false" mnemonicParsing="false" prefHeight="26.0" prefWidth="301.0" text="Add" GridPane.columnSpan="2" GridPane.rowIndex="6" />
       <TextField fx:id="textFieldAuctionID" editable="false" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" />
       <TextField fx:id="textFieldAuctionPrice" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <DateTimePicker fx:id="datePickerAuctionStartDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="2" format="dd/MM/yyyy HH:mm:ss" />
