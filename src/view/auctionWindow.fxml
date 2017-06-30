@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuctionController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="78.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="222.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="128.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="267.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="245.0" minHeight="0.0" prefHeight="63.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="245.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="275.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="275.0" minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="ID:" />
+      <Label text="Price:" GridPane.rowIndex="1" />
+      <Label text="Start Date:" GridPane.rowIndex="2" />
+      <Label text="End Date:" GridPane.rowIndex="3" />
+      <Label text="User:" GridPane.rowIndex="4" />
+      <Label text="Item:" GridPane.rowIndex="5" />
+      <Button fx:id="buttonAuctionAdd" onAction="#onButtonAuctionAddClick" defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="301.0" text="Add" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+      <TextField fx:id="textFieldAuctionID" editable="false" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" />
+      <TextField fx:id="textFieldAuctionPrice" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <DatePicker fx:id="datePickerAuctionStartDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <DatePicker fx:id="datePickerAuctionEndDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ComboBox fx:id="comboBoxAuctionUsers" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <ComboBox fx:id="comboBoxAuctionItems" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+   </children>
+</GridPane>

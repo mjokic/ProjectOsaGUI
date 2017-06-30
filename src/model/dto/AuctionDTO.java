@@ -1,5 +1,7 @@
 package model.dto;
 
+import model.Auction;
+
 import java.util.Date;
 
 
@@ -23,6 +25,16 @@ public class AuctionDTO {
         this.user_id = user_id;
         this.item_id = item_id;
         this.over = over;
+    }
+
+    public AuctionDTO(Auction auction){
+        this.id = auction.getId();
+        this.startPrice = auction.getStartPrice();
+        this.startDate = auction.getStartDate();
+        this.endDate = auction.getEndDate();
+        this.user_id = auction.getUser().getId();
+        this.item_id = auction.getItem().getId();
+        this.over = auction.isOver();
     }
 
     public long getId() {

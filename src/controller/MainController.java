@@ -213,6 +213,16 @@ public class MainController implements Initializable {
         tableColumnAuctionBids.setCellValueFactory(new PropertyValueFactory("BidsCount"));
         tableColumnAuctionOver.setCellValueFactory(new PropertyValueFactory("over"));
 
+        tableViewAuctions.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2){
+                    Auction auction = (Auction) tableViewAuctions.getSelectionModel().getSelectedItem();
+                    openAuctionWindow(auction);
+                }
+            }
+        });
+
 
         tableColumnItemsId.setCellValueFactory(new PropertyValueFactory("id"));
         tableColumnItemsName.setCellValueFactory(new PropertyValueFactory("name"));
@@ -497,11 +507,44 @@ public class MainController implements Initializable {
 
 
     public void addAuction() throws Exception{
-        // add auction
+        openAuctionWindow(null);
     }
 
     public void removeAuction() throws Exception{
         // remove item
+    }
+
+    private void openAuctionWindow(Auction auction){
+        try{
+            URL path = getClass().getClassLoader().getResource("view/auctionWindow.fxml");
+            FXMLLoader loader = new FXMLLoader(path);
+
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    AuctionController auctionController = new AuctionController();
+                    auctionController.setAuction(auction);
+                    return auctionController;
+                }
+            });
+
+            Parent layout = loader.load();
+            Scene scene = new Scene(layout, 300, 400);
+            Stage window1 = new Stage();
+            window1.initModality(Modality.APPLICATION_MODAL);
+            window1.initOwner(window);
+            window1.setTitle("Auction Add");
+            window1.setScene(scene);
+
+
+            AuctionController auctionController = loader.getController();
+            auctionController.setWindow(window1);
+
+            window1.showAndWait();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
     }
 
 
