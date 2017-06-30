@@ -15,6 +15,7 @@ import model.dto.AuctionDTO;
 import model.dto.ItemDTO;
 import model.dto.UserDTO;
 import retrofit2.Response;
+import tornadofx.control.DateTimePicker;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -32,8 +33,9 @@ public class AuctionController implements Initializable {
 
     @FXML private TextField textFieldAuctionID;
     @FXML private TextField textFieldAuctionPrice;
-    @FXML private DatePicker datePickerAuctionStartDate;
-    @FXML private DatePicker datePickerAuctionEndDate;
+    @FXML private DateTimePicker datePickerAuctionStartDate;
+//    @FXML private DatePicker datePickerAuctionEndDate;
+    @FXML private DateTimePicker datePickerAuctionEndDate;
     @FXML private ComboBox comboBoxAuctionUsers;
     @FXML private ComboBox comboBoxAuctionItems;
     @FXML private Button buttonAuctionAdd;

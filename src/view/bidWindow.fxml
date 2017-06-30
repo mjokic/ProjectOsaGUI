@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import tornadofx.control.DateTimePicker?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BidsController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="66.0" />
@@ -31,7 +32,7 @@
       <Label text="Auction:" GridPane.rowIndex="4" />
       <TextField fx:id="textFieldBidID" editable="false" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" />
       <TextField fx:id="textFieldPrice" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <DatePicker fx:id="datePickerBidDate" prefHeight="26.0" prefWidth="232.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <DateTimePicker fx:id="datePickerBidDate" prefHeight="26.0" prefWidth="232.0" GridPane.columnIndex="1" GridPane.rowIndex="2" format="dd/MM/yyyy HH:mm:ss" />
       <ComboBox fx:id="comboBoxUser" prefHeight="26.0" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <ComboBox fx:id="comboBoxAuction" prefHeight="26.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>

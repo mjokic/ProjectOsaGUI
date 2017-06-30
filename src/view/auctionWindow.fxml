@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import tornadofx.control.DateTimePicker?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuctionController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.0" minWidth="10.0" prefWidth="78.0" />
@@ -33,9 +34,10 @@
       <Button fx:id="buttonAuctionAdd" onAction="#onButtonAuctionAddClick" defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="301.0" text="Add" GridPane.columnSpan="2" GridPane.rowIndex="6" />
       <TextField fx:id="textFieldAuctionID" editable="false" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" />
       <TextField fx:id="textFieldAuctionPrice" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <DatePicker fx:id="datePickerAuctionStartDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <DatePicker fx:id="datePickerAuctionEndDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <ComboBox fx:id="comboBoxAuctionUsers" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <DateTimePicker fx:id="datePickerAuctionStartDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="2" format="dd/MM/yyyy HH:mm:ss" />
+      <!--<DatePicker fx:id="datePickerAuctionEndDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />-->
+       <DateTimePicker fx:id="datePickerAuctionEndDate" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="3" format="dd/MM/yyyy HH:mm:ss" />
+       <ComboBox fx:id="comboBoxAuctionUsers" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <ComboBox fx:id="comboBoxAuctionItems" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
    </children>
 </GridPane>

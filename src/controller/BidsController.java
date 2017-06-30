@@ -16,6 +16,7 @@ import model.dto.AuctionDTO;
 import model.dto.BidDTO;
 import model.dto.UserDTO;
 import retrofit2.Response;
+import tornadofx.control.DateTimePicker;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -35,7 +36,7 @@ public class BidsController implements Initializable {
 
     @FXML private TextField textFieldBidID;
     @FXML private TextField textFieldPrice;
-    @FXML private DatePicker datePickerBidDate;
+    @FXML private DateTimePicker datePickerBidDate;
     @FXML private ComboBox comboBoxUser;
     @FXML private ComboBox comboBoxAuction;
     @FXML private Button buttonBidSave;
