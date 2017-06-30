@@ -30,5 +30,7 @@ public interface AuctionAPIService {
     @PUT("auctions/{id}")
     Call<Auction> editAuction(@Body AuctionDTO auctionDTO, @Path("id") long id, @Header("Authorization") String token);
 
+    @DELETE("auctions/{id}")
+    Call<Void> deleteAuction(@Path("id") long id, @Header("Authorization") String token);
 
 }

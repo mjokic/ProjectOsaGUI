@@ -18,6 +18,7 @@ import javafx.util.Callback;
 import model.Auction;
 import model.Item;
 import model.Manager;
+import model.dto.AuctionDTO;
 import model.dto.BidDTO;
 import model.dto.ItemDTO;
 import model.dto.UserDTO;
@@ -511,7 +512,29 @@ public class MainController implements Initializable {
     }
 
     public void removeAuction() throws Exception{
-        // remove item
+        int index = tableViewAuctions.getSelectionModel().getSelectedIndex();
+        if(index == -1){
+            new Alert(Alert.AlertType.ERROR, "Select auction to delete!").showAndWait();
+            return;
+        }
+
+        Auction auction = (Auction) tableViewAuctions.getItems().get(index);
+        if(auction != null){
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", yes, no);
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if(result.get() == yes){
+                boolean status = sendAuctionDeleteRequest(auction.getId());
+                if(!status){
+                    new Alert(Alert.AlertType.ERROR, "Something went wrong!");
+                    return;
+                }
+            }
+        }
+
     }
 
     private void openAuctionWindow(Auction auction){
@@ -605,4 +628,25 @@ public class MainController implements Initializable {
 
         return status;
     }
+
+    private boolean sendAuctionDeleteRequest(long id){
+        boolean status = false;
+
+        Response response;
+        try{
+            response = Manager.auctionApiService
+                    .deleteAuction(id, Manager.token)
+                    .execute();
+        }catch (Exception ex){
+            return status;
+        }
+
+
+        if(response.code() == 200){
+            status = true;
+        }
+
+        return status;
+    }
+
 }

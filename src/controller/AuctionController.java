@@ -132,8 +132,10 @@ public class AuctionController implements Initializable {
         if(!status){
             new Alert(Alert.AlertType.ERROR, "Something went wrong!")
                     .showAndWait();
+            return;
         }
 
+        window.close();
     }
 
     private boolean sendAuctionAddRequest() throws Exception{
