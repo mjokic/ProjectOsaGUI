@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -15,21 +16,24 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.0" minWidth="10.0" prefWidth="218.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="128.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="267.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="359.0" minHeight="10.0" prefHeight="171.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="359.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="326.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="128.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="267.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="359.0" minHeight="10.0" prefHeight="142.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="359.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="326.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="ID:" />
-      <Label text="Name:" GridPane.rowIndex="1" />
-      <Label text="Description:" GridPane.rowIndex="2" />
-      <Label text="User:" GridPane.rowIndex="3" />
-      <TextField fx:id="textFieldItemID" editable="false" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" />
-      <TextField fx:id="textFieldItemName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextArea fx:id="textAreaItemDesc" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <ComboBox fx:id="comboBoxItemUser" prefHeight="26.0" prefWidth="216.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="buttonItemSave" onAction="#onButtonItemSave" defaultButton="true" mnemonicParsing="false" prefHeight="26.0" prefWidth="309.0" text="Save" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      <Label text="ID:" GridPane.rowIndex="1" />
+      <Label text="Name:" GridPane.rowIndex="2" />
+      <Label text="Description:" GridPane.rowIndex="3" />
+      <Label text="User:" GridPane.rowIndex="4" />
+      <TextField fx:id="textFieldItemID" editable="false" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="textFieldItemName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextArea fx:id="textAreaItemDesc" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ComboBox fx:id="comboBoxItemUser" prefHeight="26.0" prefWidth="216.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button fx:id="buttonItemSave" defaultButton="true" mnemonicParsing="false" onAction="#onButtonItemSave" prefHeight="26.0" prefWidth="309.0" text="Save" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+      <ImageView fx:id="imageViewItemImage" fitHeight="37.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
+      <Button fx:id="buttonBrowseImage" onAction="#choseImage" mnemonicParsing="false" text="Browse" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
    </children>
 </GridPane>
