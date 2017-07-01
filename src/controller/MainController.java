@@ -94,6 +94,12 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        try {
+            loadAuctions();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
         tabAuctions.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
